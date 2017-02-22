@@ -13332,14 +13332,13 @@ $(document).on('click', '.js-popupForm', function(e){
 
 $(document).on('click', '.js-submitForm, .js-submit', function(e){
     var that = this;
+    e.preventDefault();
+    // submit form and get a success message or error;
     $.get({
-        url : '/feedback-answer.html',
+        url : '/templates/feedback-answer.html',
         success: function(data){
-            $('.popup-feedback-answer .form-wrapper').html(data);
-            $('.popup-feedback-answer').addClass('open');
-            if ($('.popup-feedback-form').hasClass('open')){
-                $('.popup-feedback-form').removeClass('open');
-            }
+            $('.popup-feedback-form .form-wrapper').html(data);
+            $('.popup-feedback-form').addClass('open');
         },
         error: function(){
 
@@ -13386,7 +13385,7 @@ $(document).ready(function(){
 });
 
 function articleListPageInit(){
-	$('.article_preview-lead_text').dotdotdot({
+	$('.article-lead_text').dotdotdot({
 		watch : true,
 	});
 }
@@ -13503,6 +13502,8 @@ var switchSlider = function(el, index){
     el.find(less_elements.join(',')).addClass('less');
     el.find(elements.join(',')).addClass('current');
     el.find(great_elements.join(',')).addClass('greater');
+
+    el.find('.slider_sign_list').height(el.find('.slider_sign_list .slider_sign_wrapper.current').height());
 };
 
 // When the window has finished loading create our google map below
