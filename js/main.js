@@ -13252,6 +13252,7 @@ var loadingCounter = function(){
                 setTimeout(function(){
                     $('.preloader-page').fadeOut();
                     $('#page-wrap').fadeIn();
+                    initSlider(0);
                 }, 600);
             }
         }
@@ -13274,6 +13275,31 @@ var preloadPictures = function(callback) {
         } (new Image(), images[i]));
     }
 };
+var colourList_service = [
+	'#dbece5',
+	'#d0e7f2',
+	'#d5dadf',
+	'#dcd8e4',
+	'#d0eced',
+
+	'#e9dce3',
+	'#f4e8d2',
+	'#d7e4f1',
+	'#f1e1d7',
+	'#f1e1d7',
+
+	'#f0ecd3',
+	'#f0d9d9',
+	'#f1e1d7',
+	'#f1e1d7',
+];
+
+var colourList_main = [
+	'#dbece5',
+    '#e1e8ec',
+    '#e6e6e6'
+];
+
 // need modify this constuction and use smth else
 // depends a bit on server-side
 
@@ -13288,37 +13314,63 @@ $(document).on('click', 'a', function(e){
 		else{
 			href = href.replace('.html', '');
 		}
-
-		if (href == 'service_list'){
-			if ($this.data('index')){
-				var indexSlider = $this.data('index');
-			}
-			else {
-				var indexSlider = 0;
-			}
-		}
-
 		href = href.replace('/', '');
 
+		if ($this.data('index')){
+			var indexSlider = $this.data('index')-1;
+		}
+		else {
+			var indexSlider = 0;
+		}
+
+		switch(href){
+			case 'index':
+				// if (indexSlider == 0){
+				// 	var bg_image_style = colourList_main[indexSlider];
+				// }
+				// else {
+				// }
+				var bg_image_style = colourList_main[indexSlider];
+				break;
+			case 'service_list':
+				var bg_image_style = colourList_service[indexSlider];
+				break;
+			default:
+				var bg_image_style = '#fff';
+				break;
+		}
 		$.get({
 	        url : '/templates/' + href + '-content.html',
 	        success: function(data){
-	            $('#page-content').html(data);
-	            
-	            switch(href) {
-	            	case 'index':
-	            		initSlider(0);
-	            		break;
-	            	case 'service_list':
-	            		initSlider(indexSlider);
-	            		break;
-	            	case 'article' :
-		            	articleListPageInit();
-	            		break;
-	            	case 'contacts' :
-	            		init();
-	            		break;
-	            }
+	// console.log(bg_image_style);
+	        	$('.line_loader').removeClass('hide');
+	        	$('.line_loader').css({
+	        		'width' : 0,
+	        		'background' : bg_image_style
+	        	});
+
+	        	$('.line_loader').animate({
+	        		'width': '100%',
+	        		// 'background' : bg_image_style
+	        	}, 2000, function(){
+		            $('#page-content .content').html(data);
+		            $('.line_loader').addClass('hide');
+		            
+		            switch(href) {
+		            	case 'index':
+		            		initSlider(indexSlider);
+		            		break;
+		            	case 'service_list':
+		            		initSlider(indexSlider);
+		            		break;
+		            	case 'article' :
+			            	articleListPageInit();
+		            		break;
+		            	case 'contacts' :
+		            		init();
+		            		break;
+		            }
+	        	});
 	        },
 	        error: function(){
 	        }
@@ -13389,8 +13441,10 @@ function articleListPageInit(){
 		watch : true,
 	});
 }
-$(document).ready(function(){
-    initSlider(0);
+$(document).on('click', '.js-switchSlide', function(e){
+    e.preventDefault();
+    var index = $(e.currentTarget).data('index');
+    initSlider(index-1);
 });
 
 function initSlider(currentIndex){
@@ -13410,7 +13464,7 @@ function initSlider(currentIndex){
         });
     
     sliderList.on('mousewheel', function(event) {
-        if (sliding || $(window).height()<100) {
+        if (sliding || ($('.slider_list').height() + 225 > $(window).height())) {
             return false;
         }
         event.preventDefault();
@@ -13419,6 +13473,7 @@ function initSlider(currentIndex){
             deltaX = event.deltaX,
             deltaY = event.deltaY;
         currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length);
+        
         switchSlider(sliderList, currentIndex);
         setTimeout(function(){ sliding = false; }, 2000);
     });
@@ -13504,6 +13559,7 @@ var switchSlider = function(el, index){
     el.find(great_elements.join(',')).addClass('greater');
 
     el.find('.slider_sign_list').height(el.find('.slider_sign_list .slider_sign_wrapper.current').height());
+    el.find('.slider_title_list').height(el.find('.slider_title_list .title_wrapper.current').height());
 };
 
 // When the window has finished loading create our google map below
