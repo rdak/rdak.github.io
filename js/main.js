@@ -13325,11 +13325,6 @@ $(document).on('click', 'a', function(e){
 
 		switch(href){
 			case 'index':
-				// if (indexSlider == 0){
-				// 	var bg_image_style = colourList_main[indexSlider];
-				// }
-				// else {
-				// }
 				var bg_image_style = colourList_main[indexSlider];
 				break;
 			case 'service_list':
@@ -13342,7 +13337,6 @@ $(document).on('click', 'a', function(e){
 		$.get({
 	        url : '/templates/' + href + '-content.html',
 	        success: function(data){
-	// console.log(bg_image_style);
 	        	$('.line_loader').removeClass('hide');
 	        	$('.line_loader').css({
 	        		'width' : 0,
@@ -13351,8 +13345,7 @@ $(document).on('click', 'a', function(e){
 
 	        	$('.line_loader').animate({
 	        		'width': '100%',
-	        		// 'background' : bg_image_style
-	        	}, 2000, function(){
+	        	}, 600, function(){
 		            $('#page-content .content').html(data);
 		            $('.line_loader').addClass('hide');
 		            
@@ -13459,27 +13452,31 @@ function initSlider(currentIndex){
             var direction,
                 deltaX = event.deltaX,
                 deltaY = event.deltaY;
-            currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length);
+            currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'swipe');
+            console.log(deltaX)
+            console.log(deltaY)
             switchSlider(sliderList, currentIndex);
         });
     
     sliderList.on('mousewheel', function(event) {
-        if (sliding || ($('.slider_list').height() + 225 > $(window).height())) {
-            return false;
+        if (sliding || $(window).width()<768 || ($('.slider_list').height() + 225 > $(window).height()) ) {
+            
         }
-        event.preventDefault();
-        sliding = true;
-        var direction,
-            deltaX = event.deltaX,
-            deltaY = event.deltaY;
-        currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length);
-        
-        switchSlider(sliderList, currentIndex);
-        setTimeout(function(){ sliding = false; }, 2000);
+        else {
+            event.preventDefault();
+            sliding = true;
+            var direction,
+                deltaX = event.deltaX,
+                deltaY = event.deltaY;
+            currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'mousewheel');
+            
+            switchSlider(sliderList, currentIndex);
+            setTimeout(function(){ sliding = false; }, 1500);
+        }
     });
 };
 
-var getIndex = function(currentIndex, direction, deltaX, deltaY, length){
+var getIndex = function(currentIndex, direction, deltaX, deltaY, length, eventType){
     if (deltaX > 0 || deltaY < 0){
     	direction = 'plus';
     }
@@ -13502,7 +13499,12 @@ var getIndex = function(currentIndex, direction, deltaX, deltaY, length){
     		direction = 'plus';
     	}
     }
-    
+    if (eventType == 'swipe' && direction == 'plus'){
+        direction = 'minus';
+    }
+    else if (eventType == 'swipe' && direction == 'minus'){
+        direction = 'plus';
+    }
     if (direction == 'plus'){
     	if (currentIndex != length-1){
 	    	currentIndex++;
