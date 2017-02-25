@@ -13356,8 +13356,12 @@ $(document).on('click', 'a', function(e){
 		            	case 'service_list':
 		            		initSlider(indexSlider);
 		            		break;
-		            	case 'article' :
+		            	case 'blog':
+		            	case 'success':
+		            	case 'service_page':
 			            	articleListPageInit();
+		            		break;
+		            	case 'article' :
 		            		break;
 		            	case 'contacts' :
 		            		init();
@@ -13559,9 +13563,11 @@ var switchSlider = function(el, index){
     el.find(less_elements.join(',')).addClass('less');
     el.find(elements.join(',')).addClass('current');
     el.find(great_elements.join(',')).addClass('greater');
-
-    el.find('.slider_sign_list').height(el.find('.slider_sign_list .slider_sign_wrapper.current').height());
+console.log(el.find('.slider_title_list .title_wrapper.current'));
+console.log(el.find('.slider_title_list .title_wrapper.current').height());
     el.find('.slider_title_list').height(el.find('.slider_title_list .title_wrapper.current').height());
+    el.find('.slider_sign_list').height(el.find('.slider_sign_list .slider_sign_wrapper.current').height());
+    el.find('.slider_link_list').height(el.find('.slider_link_list .slider_link_wrapper.current').height());
 };
 
 // When the window has finished loading create our google map below
