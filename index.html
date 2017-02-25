@@ -27,7 +27,7 @@
         			        <img src="/img/icons/mob-menu.svg">
         		      	</button>
         		      	<a class="navbar-brand " href="/">
-        		      		<img src="/img/logo.png" alt="">
+        		      		<img src="/img/icons/logo.svg" alt="">
         	      		</a>
         		    </div>
         		    <nav class="navbar-collapse collapse" id="bs-navbar">
@@ -53,11 +53,26 @@
                 <div class="main_slider">
                 	<div class="slider_list">
                 		<div class="slider_bg_list">
-                			<div class="bg bg-img-1 current" style="background-image:: radial-gradient(circle at 83% 44%, rgba(246, 249, 250, 0), #dbece5); background-image: url('/img/bg-images/bg-main.png')"></div>
-                			<div class="bg bg-img-2" style="background-image:: radial-gradient(circle at 83% 44%, rgba(246, 249, 250, 0), #dbece5); background-image: url('/img/bg-images/bg-main.png')"></div>
-                			<div class="bg bg-img-3" style="background-image:: radial-gradient(circle at 83% 44%, rgba(246, 249, 250, 0), #dbece5); background-image: url('/img/bg-images/bg-main.png')"></div>
+                			<div class="bg bg-img-1 current" style="background-image:: radial-gradient(circle at 83% 44%, rgba(246, 249, 250, 0), #dbece5); background-image: url('/img/bg-images/bg-main.png')">
+                				<div class="container">
+                					<a href="#" class="js-switchSlide main_slider_navigation left hide" data-index="3"></a>
+                					<a href="#" class="js-switchSlide main_slider_navigation right" data-index="2"></a>
+                				</div>
+                			</div>
+                			<div class="bg bg-img-2" style="background-image:: radial-gradient(circle at 83% 44%, rgba(246, 249, 250, 0), #dbece5); background-image: url('/img/bg-images/bg-main.png')">
+                				<div class="container">
+                					<a href="#" class="js-switchSlide main_slider_navigation left" data-index="1"></a>
+                					<a href="#" class="js-switchSlide main_slider_navigation right" data-index="3"></a>
+                				</div>
+                			</div>
+                			<div class="bg bg-img-3" style="background-image:: radial-gradient(circle at 83% 44%, rgba(246, 249, 250, 0), #dbece5); background-image: url('/img/bg-images/bg-main.png')">
+                				<div class="container">
+                					<a href="#" class="js-switchSlide main_slider_navigation left" data-index="2"></a>
+                					<a href="#" class="js-switchSlide main_slider_navigation right hide" data-index="1"></a>
+                				</div>
+                			</div>
                 		</div>
-                		
+                
                 		<div class="slider_menu">
                 			<div class="container">
                 				<ul>
@@ -74,6 +89,19 @@
                 			</div>
                 		</div>
                 
+                		<div class="slider_index_list">
+                			<div class="container">
+                				<span class="index_wrapper placeholder">
+                				</span>
+                				<span class="index_wrapper placeholder">
+                				</span>
+                				<span class="index_wrapper">
+                					<div class="index" style="position:relative;display:inline-block;">‘</div>
+                					<div class="index" style="position:relative;display:inline-block;">‘</div>
+                				</span>
+                			</div>
+                		</div>
+                
                 		<div class="slider_title_list">
                 			<div class="container">
                 				<span class="title_wrapper main_slide current">
@@ -87,6 +115,7 @@
                 				</span>
                 			</div>
                 		</div>
+                
                 		<div class="slider_sign_list">
                 			<div class="container">
                 				<span class="slider_sign_wrapper main_slide current">
@@ -96,60 +125,88 @@
                 					<div class="slider_sign">
                 						<ul>
                 							<li>
-                								<span class="list-style-type">01</span>
-                								<a href="/service_list.html" data-index="1">Семейные споры</a>
+                								<a href="/service_list.html" data-index="1">
+                									<span class="list-style-type">01</span>
+                									<span class="list-item-content">Семейные споры</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">02</span>
-                								<a href="/service_list.html" data-index="2">Недвижимость: сопровождение и регистрация</a>
+                								<a href="/service_list.html" data-index="2">
+                									<span class="list-style-type">02</span>
+                									<span class="list-item-content">Недвижимость: сопровождение и регистрация</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">03</span>
-                								<a href="/service_list.html" data-index="3">Споры по недвижимости</a>
+                								<a href="/service_list.html" data-index="3">
+                									<span class="list-style-type">03</span>
+                									<span class="list-item-content">Споры по недвижимости</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">04</span>
-                								<a href="/service_list.html" data-index="4">Наследство</a>
+                								<a href="/service_list.html" data-index="4">
+                									<span class="list-style-type">04</span>
+                									<span class="list-item-content">Наследство</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">05</span>
-                								<a href="/service_list.html" data-index="5">Разработка и экспертиза документов для суда</a>
+                								<a href="/service_list.html" data-index="5">
+                									<span class="list-style-type">05</span>
+                									<span class="list-item-content">Разработка и экспертиза документов для суда</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">06</span>
-                								<a href="/service_list.html" data-index="6">Договоры: разработка и правовая экспертиза</a>
+                								<a href="/service_list.html" data-index="6">
+                									<span class="list-style-type">06</span>
+                									<span class="list-item-content">Договоры: разработка и правовая экспертиза</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">07</span>
-                								<a href="/service_list.html" data-index="7">Защита прав потребителей</a>
+                								<a href="/service_list.html" data-index="7">
+                									<span class="list-style-type">07</span>
+                									<span class="list-item-content">Защита прав потребителей</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">08</span>
-                								<a href="/service_list.html" data-index="8">Миграционные споры</a>
+                								<a href="/service_list.html" data-index="8">
+                									<span class="list-style-type">08</span>
+                									<span class="list-item-content">Миграционные споры</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">09</span>
-                								<a href="/service_list.html" data-index="9">Взыскание долга</a>
+                								<a href="/service_list.html" data-index="9">
+                									<span class="list-style-type">09</span>
+                									<span class="list-item-content">Взыскание долга</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">10</span>
-                								<a href="/service_list.html" data-index="10">Арбитраж</a>
+                								<a href="/service_list.html" data-index="10">
+                									<span class="list-style-type">10</span>
+                									<span class="list-item-content">Арбитраж</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">11</span>
-                								<a href="/service_list.html" data-index="11">Услуги иностранным гражданам</a>
+                								<a href="/service_list.html" data-index="11">
+                									<span class="list-style-type">11</span>
+                									<span class="list-item-content">Услуги иностранным гражданам</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">12</span>
-                								<a href="/service_list.html" data-index="12">Трудовое право</a>
+                								<a href="/service_list.html" data-index="12">
+                									<span class="list-style-type">12</span>
+                									<span class="list-item-content">Трудовое право</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">13</span>
-                								<a href="/service_list.html" data-index="13">Абонентское обслуживание</a>
+                								<a href="/service_list.html" data-index="13">
+                									<span class="list-style-type">13</span>
+                									<span class="list-item-content">Абонентское обслуживание</span>
+                								</a>
                 							</li>
                 							<li>
-                								<span class="list-style-type">14</span>
-                								<a href="/service_list.html" data-index="14">Консультации юриста</a>
+                								<a href="/service_list.html" data-index="14">
+                									<span class="list-style-type">14</span>
+                									<span class="list-item-content">Консультации юриста</span>
+                								</a>
                 							</li>
                 						</ul>
                 					</div>
@@ -171,6 +228,7 @@
                 				</span>
                 			</div>
                 		</div>
+                
                 		<div class="slider_link_list">
                 			<div class="container">
                 				<span class="slider_link_wrapper main_slide current">
@@ -184,6 +242,7 @@
                 				</span>
                 			</div>
                 		</div>
+                
                 		<div class="slider_icon">
                 			<div class="container">
                 				<div class="img-wrapper">
@@ -218,6 +277,8 @@
     				</div>
     			</div>
     		</div>
+    		<div class="message hide">
+    		</div>
     	</div>
     </div>
     
@@ -237,7 +298,7 @@
     		<div class="row links">
     			<div class="col-xs-12 col-sm-12 col-md-2">
     				<a href="/" class="brand btn-hover">
-    					<img src="/img/logo-footer.png" alt="">
+    					<img src="/img/icons/logo-footer.svg" alt="">
     				</a>
     			</div>
     			<div class="col-xs-12 col-sm-12 col-md-8">
