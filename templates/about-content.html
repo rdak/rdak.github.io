@@ -18,9 +18,21 @@
 						</div>
 						<div class="form">
 							<div class="input-group">
-								<input type="text" placeholder="Имя">
-								<input type="text" placeholder="Телефон">
-								<input type="text" placeholder="Email">
+								<div class="field-wrapper">
+									<input class="field_name field_required" type="text">
+									<div class="placeholder">Имя<span class="required">*</span></div>
+									<div class="errorMessage"></div>
+								</div>
+								<div class="field-wrapper">
+									<input class="field_email field_required" type="text">
+									<div class="placeholder">Email<span class="required">*</span></div>
+									<div class="errorMessage"></div>
+								</div>
+								<div class="field-wrapper">
+									<input class="field_phone" type="text">
+									<div class="placeholder">Телефон</div>
+									<div class="errorMessage"></div>
+								</div>
 							</div>
 							<div class="btn-wrapper">
 								<a href="#" class="js-submit link_next">ОТПРАВИТЬ</a>
@@ -32,7 +44,7 @@
 		</div>
 	</div>
 
-	<div class="recom-block">
+	<div class="recom-block" id="recommendation-block">
 		<h2 class="title recom-block-title">
 			Нас рекомендуют
 		</h2>

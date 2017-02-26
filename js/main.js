@@ -13306,7 +13306,17 @@ var colourList_main = [
 $(document).on('click', 'a', function(e){
 	var $this = $(e.currentTarget);
 	var href = $this.attr('href');
-	if (href && href!="#"){
+	var pathname = $this.data('pathname');
+	// var location = window.location.pathname;
+	var mainSliderList = $('.main_slider .slider_list');
+	var outerApp = false;
+	if (href.indexOf('skype') !== -1 || href.indexOf('mailto') !== -1){
+		outerApp = true;
+	}
+	if (!outerApp && mainSliderList.length > 0 && pathname == '/'){
+
+	}
+	else if (href && href!="#" && !outerApp){
 		e.preventDefault();
 		if (href == "/"){
 			href = href + 'index';
@@ -13330,6 +13340,8 @@ $(document).on('click', 'a', function(e){
 			case 'service_list':
 				var bg_image_style = colourList_service[indexSlider];
 				break;
+			case 'about' : 
+				var mainslider = $this.data('mainslider');
 			default:
 				var bg_image_style = '#fff';
 				break;
@@ -13370,6 +13382,9 @@ $(document).on('click', 'a', function(e){
 			            	articleListPageInit();
 		            		break;
 		            	case 'article' :
+		            		if (mainslider){
+		            			showRecommendation();
+		            		}
 		            		break;
 		            	case 'contacts' :
 		            		init();
@@ -13392,17 +13407,45 @@ $(document).on('click', '.js-popupForm', function(e){
 $(document).on('click', '.js-submitForm, .js-submit', function(e){
     var that = this;
     e.preventDefault();
-    $.get({
-        url : '/templates/feedback-answer.html',
-        success: function(data){
-            $('.popup-feedback-form .form-wrapper').addClass('hide');
-            $('.popup-feedback-form .message').removeClass('hide').html(data);
-            $('.popup-feedback-form').addClass('open');
-        },
-        error: function(){
+    // validation on server : add 'error' to field-wrapper + errormessage;
+    // .field_reuired each
+    var $form = $(e.delegateTarget);
+    var name = $form.find('.field_name').val();
+    var email = $form.find('.field_email').val();
 
-        }
-    });
+    if(!name.length){
+        $form.find('.field_name').parent().addClass('error');
+        $form.find('.field_name').parent().find('.errorMessage').tooltip({
+            title : 'Заполните, пожалуйста, поле',
+        });
+    }
+    else {
+        $form.find('.field_name').parent().removeClass('error');
+    }
+
+    if(!email.length){
+        $form.find('.field_email').parent().addClass('error');
+    }
+    else {
+        $form.find('.field_email').parent().removeClass('error');
+        $form.find('.field_email').parent().find('.errorMessage').tooltip({
+            title : 'Заполните, пожалуйста, поле',
+        });
+    }
+
+    if (name.length>0 && email.length>0){
+        $.get({
+            url : '/templates/feedback-answer.html',
+            success: function(data){
+                $('.popup-feedback-form .form-wrapper').addClass('hide');
+                $('.popup-feedback-form .message').removeClass('hide').html(data);
+                $('.popup-feedback-form').addClass('open');
+            },
+            error: function(){
+
+            }
+        });
+    }
 });
 
 $(document).on('click', '.js-close', function(e){
@@ -13451,9 +13494,26 @@ function articleListPageInit(){
 	});
 }
 $(document).on('click', '.js-switchSlide', function(e){
-    e.preventDefault();
+    // need server/navigation in url for 
+    // checking window.location.pathname == pathname;
+    var sliderList = $('.slider_list');
     var index = $(e.currentTarget).data('index');
-    initSlider(index-1);
+    var pathname = $(e.currentTarget).data('pathname');
+    var mainSliderList = $('.main_slider .slider_list');
+
+    if (pathname=='/' && mainSliderList.length && sliderList.length > 0){
+        e.preventDefault();
+        initSlider(index-1);
+    }
+    else {
+        if (sliderList.length > 0){
+            e.preventDefault();
+            initSlider(index-1);
+        }
+        else {
+            // e.preventDefault();
+        }
+    }
 });
 
 function initSlider(currentIndex){
@@ -13578,9 +13638,14 @@ var switchSlider = function(el, index){
     el.find(less_elements.join(',')).addClass('less');
     el.find(elements.join(',')).addClass('current');
     el.find(great_elements.join(',')).addClass('greater');
-
+    if (el.closest('.main_slider').length){
+        var ssl_height = el.find('.slider_sign_list .slider_sign_wrapper.current').height() - 20;
+    }
+    else {
+        var ssl_height = el.find('.slider_sign_list .slider_sign_wrapper.current').height();
+    }
     el.find('.slider_title_list').height(el.find('.slider_title_list .title_wrapper.current').height());
-    el.find('.slider_sign_list').height(el.find('.slider_sign_list .slider_sign_wrapper.current').height());
+    el.find('.slider_sign_list').height(ssl_height);
     el.find('.slider_link_list').height(el.find('.slider_link_list .slider_link_wrapper.current').height());
 };
 
@@ -13617,4 +13682,8 @@ function init() {
         map: map,
         title: 'Snazzy!'
     });
+}
+
+function showRecommendation(){
+    // $()
 }

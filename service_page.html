@@ -33,9 +33,10 @@
         		    <nav class="navbar-collapse collapse" id="bs-navbar">
         		    	<ul class="nav navbar-nav">
         					<li class="active"><a class="" href="/about.html">О компании</a></li>
-        					<li><a class="" href="/service_list.html">Услуги</a></li>
+        					<li><a class="js-switchSlide" href="/" data-index="2" data-pathname="/">Услуги</a></li>
         					<li><a class="" href="/blog.html">Блог</a></li>
         					<li><a class="" href="/contacts.html">Контакты</a></li>
+        					<li><a href="skype:+74958121188?call">+7 (495) 812-11-88</a></li>
         		    	</ul>
         				<ul class="nav navbar-nav navbar-right">
         					<li><a class="social_item" target="_blank" href="https://www.facebook.com/"><img src="/img/icons/fb.svg" alt=""></a></li>
@@ -75,12 +76,24 @@
                 						</div>
                 						<div class="form">
                 							<div class="input-group">
-                								<input type="text" placeholder="Имя">
-                								<input type="text" placeholder="Телефон">
-                								<input type="text" placeholder="Email">
+                								<div class="field-wrapper">
+                									<input class="field_name field_required" type="text">
+                									<div class="placeholder">Имя<span class="required">*</span></div>
+                									<div class="errorMessage"></div>
+                								</div>
+                								<div class="field-wrapper">
+                									<input class="field_email field_required" type="text">
+                									<div class="placeholder">Email<span class="required">*</span></div>
+                									<div class="errorMessage"></div>
+                								</div>
+                								<div class="field-wrapper">
+                									<input class="field_phone" type="text">
+                									<div class="placeholder">Телефон</div>
+                									<div class="errorMessage"></div>
+                								</div>
                 							</div>
                 							<div class="btn-wrapper">
-                								<a href="#" class="js-submit link_next">Заказать</a>
+                								<a href="#" class="js-submit link_next">ОТПРАВИТЬ</a>
                 							</div>
                 						</div>
                 					</div>
@@ -104,7 +117,7 @@
                 		<div class="row">
                 			<div class="col-xs-12 col-sm-12 col-md-8">
                 				<h2 class="title article-block-title">
-                					Успешные дела
+                					<a href="/success.html">Успешные дела</a>
                 				</h2>
                 				<div class="article-list">
                 					<div class="row">
@@ -155,7 +168,7 @@
                 			</div>
                 			<div class="col-xs-12 col-sm-12 col-md-4">
                 				<h2 class="title article-block-title">
-                					Cтатьи по теме
+                					<a href="/blog.html">Cтатьи по теме</a>
                 				</h2>
                 				<div class="article-list">
                 					<div class="row">
@@ -198,13 +211,25 @@
     		</a>
     		<div class="form-wrapper">
     			<div class="form-title">
-    				Получить бесплатную консультацию юриста
+    				Получить консультацию юриста
     			</div>
     			<div class="form feedback">
     				<div class="input-group">
-    					<input type="text" placeholder="Имя">
-    					<input type="text" placeholder="Телефон">
-    					<input type="text" placeholder="Email">
+    					<div class="field-wrapper">
+    						<input class="field_name field_required" type="text">
+    						<div class="placeholder">Имя<span class="required">*</span></div>
+    						<div class="errorMessage"></div>
+    					</div>
+    					<div class="field-wrapper">
+    						<input class="field_email field_required" type="text">
+    						<div class="placeholder">Email<span class="required">*</span></div>
+    						<div class="errorMessage"></div>
+    					</div>
+    					<div class="field-wrapper">
+    						<input class="field_phone" type="text">
+    						<div class="placeholder">Телефон</div>
+    						<div class="errorMessage"></div>
+    					</div>
     				</div>
     				<div class="btn-wrapper">
     					<a href="#" class="js-submit link_next">ОТПРАВИТЬ</a>
@@ -237,8 +262,8 @@
     			</div>
     			<div class="col-xs-12 col-sm-12 col-md-8">
     				<ul class="navigation">
-    			        <li>+7 (495) 812-11-88</li>
-    			        <li>hello@delo4.com</li>
+    			        <li><a href="skype:+74958121188?call">+7 (495) 812-11-88</a></li>
+    			        <li><a href="mailto:hello@delo4.com">hello@delo4.com</a></li>
     			        <li>Москва, Лесная 3, офис 101</li>
     			    </ul>
     			</div>

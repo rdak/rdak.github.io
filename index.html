@@ -33,9 +33,10 @@
         		    <nav class="navbar-collapse collapse" id="bs-navbar">
         		    	<ul class="nav navbar-nav">
         					<li class="active"><a class="" href="/about.html">О компании</a></li>
-        					<li><a class="" href="/service_list.html">Услуги</a></li>
+        					<li><a class="js-switchSlide" href="/" data-index="2" data-pathname="/">Услуги</a></li>
         					<li><a class="" href="/blog.html">Блог</a></li>
         					<li><a class="" href="/contacts.html">Контакты</a></li>
+        					<li><a href="skype:+74958121188?call">+7 (495) 812-11-88</a></li>
         		    	</ul>
         				<ul class="nav navbar-nav navbar-right">
         					<li><a class="social_item" target="_blank" href="https://www.facebook.com/"><img src="/img/icons/fb.svg" alt=""></a></li>
@@ -127,7 +128,7 @@
                 							<li>
                 								<a href="/service_list.html" data-index="1">
                 									<span class="list-style-type">01</span>
-                									<span class="list-item-content">Семейные споры</span>
+                									<span class="list-item-content">Семейные споры</span>
                 								</a>
                 							</li>
                 							<li>
@@ -232,13 +233,13 @@
                 		<div class="slider_link_list">
                 			<div class="container">
                 				<span class="slider_link_wrapper main_slide current">
-                					<a class="slider_link js-popupForm link_next" href="#">ПОЛУЧИТЬ БЕСПЛАТНУЮ КОНСУЛЬТАЦИЮ ЮРИСТА</a>
+                					<a class="slider_link js-popupForm link_next" href="#">ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ ЮРИСТА</a>
                 				</span>
                 				<span class="slider_link_wrapper list_services_slide placeholder">
                 					placeholder
                 				</span>
                 				<span class="slider_link_wrapper recomendation_slide">
-                					<a class="slider_link link_next" href="#">Ещё рекомендации</a>
+                					<a class="slider_link link_next" href="/about.html" data-mainslider="true">Ещё рекомендации</a>
                 				</span>
                 			</div>
                 		</div>
@@ -264,13 +265,25 @@
     		</a>
     		<div class="form-wrapper">
     			<div class="form-title">
-    				Получить бесплатную консультацию юриста
+    				Получить консультацию юриста
     			</div>
     			<div class="form feedback">
     				<div class="input-group">
-    					<input type="text" placeholder="Имя">
-    					<input type="text" placeholder="Телефон">
-    					<input type="text" placeholder="Email">
+    					<div class="field-wrapper">
+    						<input class="field_name field_required" type="text">
+    						<div class="placeholder">Имя<span class="required">*</span></div>
+    						<div class="errorMessage"></div>
+    					</div>
+    					<div class="field-wrapper">
+    						<input class="field_email field_required" type="text">
+    						<div class="placeholder">Email<span class="required">*</span></div>
+    						<div class="errorMessage"></div>
+    					</div>
+    					<div class="field-wrapper">
+    						<input class="field_phone" type="text">
+    						<div class="placeholder">Телефон</div>
+    						<div class="errorMessage"></div>
+    					</div>
     				</div>
     				<div class="btn-wrapper">
     					<a href="#" class="js-submit link_next">ОТПРАВИТЬ</a>
@@ -303,8 +316,8 @@
     			</div>
     			<div class="col-xs-12 col-sm-12 col-md-8">
     				<ul class="navigation">
-    			        <li>+7 (495) 812-11-88</li>
-    			        <li>hello@delo4.com</li>
+    			        <li><a href="skype:+74958121188?call">+7 (495) 812-11-88</a></li>
+    			        <li><a href="mailto:hello@delo4.com">hello@delo4.com</a></li>
     			        <li>Москва, Лесная 3, офис 101</li>
     			    </ul>
     			</div>

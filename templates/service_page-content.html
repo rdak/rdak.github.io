@@ -23,12 +23,24 @@
 						</div>
 						<div class="form">
 							<div class="input-group">
-								<input type="text" placeholder="Имя">
-								<input type="text" placeholder="Телефон">
-								<input type="text" placeholder="Email">
+								<div class="field-wrapper">
+									<input class="field_name field_required" type="text">
+									<div class="placeholder">Имя<span class="required">*</span></div>
+									<div class="errorMessage"></div>
+								</div>
+								<div class="field-wrapper">
+									<input class="field_email field_required" type="text">
+									<div class="placeholder">Email<span class="required">*</span></div>
+									<div class="errorMessage"></div>
+								</div>
+								<div class="field-wrapper">
+									<input class="field_phone" type="text">
+									<div class="placeholder">Телефон</div>
+									<div class="errorMessage"></div>
+								</div>
 							</div>
 							<div class="btn-wrapper">
-								<a href="#" class="js-submit link_next">Заказать</a>
+								<a href="#" class="js-submit link_next">ОТПРАВИТЬ</a>
 							</div>
 						</div>
 					</div>
@@ -52,7 +64,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-8">
 				<h2 class="title article-block-title">
-					Успешные дела
+					<a href="/success.html">Успешные дела</a>
 				</h2>
 				<div class="article-list">
 					<div class="row">
@@ -103,7 +115,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4">
 				<h2 class="title article-block-title">
-					Cтатьи по теме
+					<a href="/blog.html">Cтатьи по теме</a>
 				</h2>
 				<div class="article-list">
 					<div class="row">
