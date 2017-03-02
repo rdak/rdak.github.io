@@ -13567,6 +13567,7 @@ function checkArticles(e){
 		            success: function(data){
 		            	loading_block = false;
 		                $blog_list.append(data);
+		                $blog_list.find('.row_loader').remove();
 		            },
 		            error: function(){
 
@@ -13585,6 +13586,7 @@ function checkArticles(e){
 		            success: function(data){
 		            	loading_block = false;
 		                $success_list.append(data);
+		                $success_list.find('.row_loader').remove();
 		            },
 		            error: function(){
 
