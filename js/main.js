@@ -13346,6 +13346,7 @@ $(document).on('click', 'a', function(e){
 				var bg_image_style = '#fff';
 				break;
 		}
+		$('#bs-navbar').collapse('hide');
 		$.get({
 	        url : '/templates/' + href + '-content.html',
 	        success: function(data){
@@ -13510,11 +13511,11 @@ $(document).on('click', '.img-list-popup .js-popup', function(e){
         var imgSourceList = [];
         $.each(imgList, function(i, val){
             // imgSourceList.push(val.dataset.source);
-            popup.find('.js-slick_carousel').append('<div class="img-wrapper"><img style="width: 500px; height: 700px;" src="' + val.dataset.source + '"></div>');
+            popup.find('.js-slick_carousel').append('<div class="img-wrapper"><img src="' + val.dataset.source + '"></div>');
         });
 
         popup.find('.js-slick_carousel').slick({
-            adaptiveHeight : false,
+            adaptiveHeight : true,
             mobileFirst : true,
             prevArrow : '<a class="slick-prev"></a>',
             nextArrow : '<a class="slick-next"></a>',
@@ -13558,16 +13559,16 @@ function checkArticles(e){
 		if ($block.length){
 			if ($blog_list.find('.article-item').length < maxBlog){
 				$blog_list.append('<div class="row row_loader"> <div class="col-xs-12 text-center"> <div class="rotating-border"></div> </div> </div>');
-				var url = '/templates/article-list.html';
+				var url = '/templates/blog-list.html';
 				if ($('.service-block').length){
-					url = '/templates/blog-list-in-article.html';
+					url = '/templates/blog-list-in-service.html';
 				}
 				$.get({
 		            url : url,
 		            success: function(data){
 		            	loading_block = false;
-		                $blog_list.append(data);
 		                $blog_list.find('.row_loader').remove();
+		                $blog_list.find('.row').append(data);
 		            },
 		            error: function(){
 
@@ -13577,16 +13578,16 @@ function checkArticles(e){
 
 			if ($success_list.find('.article-item').length < maxSuccess){
 				$success_list.append('<div class="row row_loader"> <div class="col-xs-12 text-center"> <div class="rotating-border"></div> </div> </div>');
-				var url = '/templates/article-list.html';
+				var url = '/templates/success-list.html';
 				if ($('.service-block').length){
-					url = '/templates/success-list-in-article.html';
+					url = '/templates/success-list-in-service.html';
 				}
 				$.get({
 		            url : url,
 		            success: function(data){
 		            	loading_block = false;
-		                $success_list.append(data);
 		                $success_list.find('.row_loader').remove();
+		                $success_list.find('.row').append(data);
 		            },
 		            error: function(){
 
@@ -13599,12 +13600,35 @@ function checkArticles(e){
 $(document).on('click', '.js-switchSlide', function(e){
     // need server/navigation in url for 
     // checking window.location.pathname == pathname;
+     
+    var $this = $(e.currentTarget);
+    if ($this.closest('.slider_bg_list').length){
+        var length = $this.closest('.slider_bg_list').find('.bg').length;
+        var $thisIndex = Number($this.closest('.bg').data('index'));
+
+        if ($this.hasClass('left')){
+            var index = $thisIndex - 1;
+        }
+        else if ($this.hasClass('right')){
+            var index = $thisIndex + 1;
+        }
+
+        if (index == 0){
+            index = length;
+        }
+        else if(index == length + 1) {
+            index = 0;
+        }
+    }
+    else {
+        var index = $(e.currentTarget).data('index');
+    }
+
     var sliderList = $('.slider_list');
-    var index = $(e.currentTarget).data('index');
-    var pathname = $(e.currentTarget).data('pathname');
+    var pathname = $this.data('pathname');
     var mainSliderList = $('.main_slider .slider_list');
 
-    if (pathname=='/' && mainSliderList.length && sliderList.length > 0){
+    if (pathname == '/' && mainSliderList.length && sliderList.length > 0){
         e.preventDefault();
         initSlider(index-1);
     }
@@ -13621,17 +13645,18 @@ $(document).on('click', '.js-switchSlide', function(e){
 
 function initSlider(currentIndex){
     var sliderList = $('.slider_list');
-    if (sliderList.length && $('.slider_list').height() + 225 <= $(window).height()){
+    /*if (sliderList.length && $(window).width()>768){
         $('body').addClass('slider_page');
     }
     else{
         $('body').removeClass('slider_page');
-    }
+    }*/
 
     switchSlider(sliderList, currentIndex);
 
     var length = sliderList.find('.slider_bg_list .bg').length;
     var sliding = null;
+
     var hammertime = new Hammer(sliderList[0]);
         hammertime.on('swipe', function(event) {
             var direction,
@@ -13640,20 +13665,40 @@ function initSlider(currentIndex){
             currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'swipe');
             switchSlider(sliderList, currentIndex);
         });
+
     sliderList.on('mousewheel', function(event) {
-        if (sliding || $(window).width()<768 || ($('.slider_list').height() + 225 > $(window).height()) ) {
-            
+        var direction,
+            deltaX = event.deltaX,
+            deltaY = event.deltaY;
+        if (sliding || $(window).width()<1024) {
         }
         else {
-            event.preventDefault();
-            sliding = true;
-            var direction,
-                deltaX = event.deltaX,
-                deltaY = event.deltaY;
-            currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'mousewheel');
-            
-            switchSlider(sliderList, currentIndex);
-            setTimeout(function(){ sliding = false; }, 1500);
+            if ($('.slider_list').outerHeight() + 90 > $(window).height()){
+                if ($(window).scrollTop() <= $('.slider_list').outerHeight() + 225 - $(window).height() && deltaY<0){
+                    event.preventDefault();
+                    sliding = true;
+                    currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'mousewheel');
+                    
+                    switchSlider(sliderList, currentIndex);
+                    setTimeout(function(){ sliding = false; }, 1200);
+                }
+                else if ($(window).scrollTop() < 110 && deltaY>0){
+                    event.preventDefault();
+                    sliding = true;
+                    currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'mousewheel');
+                    
+                    switchSlider(sliderList, currentIndex);
+                    setTimeout(function(){ sliding = false; }, 1200);
+                }
+            }
+            else{
+                event.preventDefault();
+                sliding = true;
+                currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'mousewheel');
+                
+                switchSlider(sliderList, currentIndex);
+                setTimeout(function(){ sliding = false; }, 1200);
+            }
         }
     });
 };
@@ -13681,12 +13726,12 @@ var getIndex = function(currentIndex, direction, deltaX, deltaY, length, eventTy
     		direction = 'plus';
     	}
     }
-    if (eventType == 'swipe' && direction == 'plus'){
+    /*if (eventType == 'swipe' && direction == 'plus'){
         direction = 'minus';
     }
     else if (eventType == 'swipe' && direction == 'minus'){
         direction = 'plus';
-    }
+    }*/
     if (direction == 'plus'){
     	if (currentIndex != length-1){
 	    	currentIndex++;
