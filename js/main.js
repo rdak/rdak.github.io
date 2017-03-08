@@ -13425,15 +13425,18 @@ var preloadPictures = function(callback) {
         j;
 
     for (i = 0, j = images.length; i < j; i++) {
-        (function (img, src) {
+            // var img = new Image();
+            $('<img />').attr('src', images[i]).appendTo('body').hide();
+            var img = $('<img/>')[0];
             img.onerror,
             img.onabort,
             img.onload = function () {
                 loaded++;
                 callback();
             };
-            img.src = src;
-        } (new Image(), images[i]));
+
+            img.src = images[i];
+            $(img).html();
     }
 };
 var colourList_service = [
@@ -13503,6 +13506,7 @@ $(document).on('click', 'a', function(e){
 				break;
 			case 'about' : 
 				var mainslider = $this.data('mainslider');
+				console.log(mainslider);
 			default:
 				var bg_image_style = '#fff';
 				break;
@@ -13559,11 +13563,13 @@ $(document).on('click', 'a', function(e){
 		            	case 'service_page':
 			            	articleListPageInit();
 		            		break;
-		            	case 'article' :
+		            	case 'about' :
 		            		if (mainslider){
 		            			showRecommendation();
 		            		}
 		            		break;
+		            	case 'article' :
+		            		
 		            	case 'contacts' :
 		            		init();
 		            		break;
@@ -13692,8 +13698,8 @@ $(document).on('click', '.img-list-popup .js-popup', function(e){
             popup.find('.js-slick_carousel').slick({
                 // adaptiveHeight : true,
                 mobileFirst : true,
-                prevArrow : '<a class="slick-prev"></a>',
-                nextArrow : '<a class="slick-next"></a>',
+                prevArrow : '<a href="#" class="slick-prev"></a>',
+                nextArrow : '<a href="#" class="slick-next"></a>',
                 initialSlide : $this.data('index'),
                 rows : 1,
                 slidesPerRow : 1,
@@ -14012,5 +14018,8 @@ function init() {
 }
 
 function showRecommendation(){
-    // $()
+    console.log('as');
+    $('html, body').animate({
+        scrollTop: $('#recommendation-block').offset().top - $('#header').height()
+    }, 200);
 }
