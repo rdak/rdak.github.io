@@ -13929,7 +13929,7 @@ function initSlider(currentIndex){
                 sliding = true;
                 currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'swipe');
                 switchSlider(sliderList, currentIndex);
-                setTimeout(function(){ sliding = false; }, 2000);
+                setTimeout(function(){ sliding = false; }, 1200);
             }
         });
 
