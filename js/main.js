@@ -13925,10 +13925,11 @@ function initSlider(currentIndex){
             var direction,
                 deltaX = event.deltaX,
                 deltaY = event.deltaY;
-            if (sliding && Math.abs(deltaX) > Math.abs(deltaY)){
+            if (!sliding && Math.abs(deltaX) > Math.abs(deltaY)){
+                sliding = true;
                 currentIndex = getIndex(currentIndex, direction, deltaX, deltaY, length, 'swipe');
                 switchSlider(sliderList, currentIndex);
-                setTimeout(function(){ sliding = false; }, 1200);
+                setTimeout(function(){ sliding = false; }, 2000);
             }
         });
 
